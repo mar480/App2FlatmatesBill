@@ -5,25 +5,6 @@ class Bill:
     def __init__(self, amount, month):
         self.amount = amount
         self.month = month
-        self.period = self.get_period(month)
-
-    def get_period(self, month):
-        period = {
-            "Jan" : 31,
-            "Feb": 28,
-            "March": 31,
-            "April": 30,
-            "May": 31,
-            "June": 30,
-            "July": 31,
-            "August": 31,
-            "Sept": 30,
-            "Oct": 31,
-            "Nov": 30,
-            "Dec": 31,
-        }
-        return period.get(month)
-
 
 class Flatmate:
     """
@@ -33,8 +14,9 @@ class Flatmate:
         self.name = name
         self.days_in_house = days_in_house
 
-    def pays(self, bill):
-        return round((self.days_in_house/bill.period) * bill.amount, 2)
+    def pays(self, bill, flatmate2):
+        to_pay = round(self.days_in_house/(self.days_in_house + flatmate2.days_in_house) * bill.amount, 2)
+        return f"{self.name} owes £{to_pay} this month ({bill.month})"
 
 class PDFreport:
     """
