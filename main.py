@@ -2,9 +2,28 @@ class Bill:
     """
     Object that contains data about a bill, such as total amount and period of the bill.
     """
-    def __init__(self, amount, period):
+    def __init__(self, amount, month):
         self.amount = amount
-        self.period = period
+        self.month = month
+        self.period = self.get_period(month)
+
+    def get_period(self, month):
+        period = {
+            "Jan" : 31,
+            "Feb": 28,
+            "March": 31,
+            "April": 30,
+            "May": 31,
+            "June": 30,
+            "July": 31,
+            "August": 31,
+            "Sept": 30,
+            "Oct": 31,
+            "Nov": 30,
+            "Dec": 31,
+        }
+        return period.get(month)
+
 
 class Flatmate:
     """
@@ -15,7 +34,7 @@ class Flatmate:
         self.days_in_house = days_in_house
 
     def pays(self, bill):
-        pass
+        return round((self.days_in_house/bill.period) * bill.amount, 2)
 
 class PDFreport:
     """
@@ -25,5 +44,5 @@ class PDFreport:
     def __init__(self, filename):
         self.filename = filename
 
-    def generate(self, flatemate1, flatemate2, bill):
+    def generate(self, flatmate1, flatmate2, bill):
         pass
